@@ -14,6 +14,7 @@ def test_add_conjured():
     inventario = GildedRose(items)
     inventario.create_item(2, "item2", 10, 20, "conjured")
     assert len(inventario.items) == 1
+    assert inventario.items[0].get_id() == 2
     assert inventario.items[0].__class__.__name__ == "ConjuredItem"
 
 
@@ -29,6 +30,7 @@ def test_add_aged_brie():
     inventario = GildedRose(items)
     inventario.create_item(4, "item4", 10, 20, "aged brie")
     assert len(inventario.items) == 1
+    assert inventario.items[0].get_id() == 4
     assert inventario.items[0].__class__.__name__ == "AgedBrie"
 
 def test_add_backstage():
