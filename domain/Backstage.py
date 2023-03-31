@@ -8,7 +8,7 @@ class Backstage(NormalItem):
         NormalItem.__init__(self, _id, name, sell_in, quality)  # Utilizamos el constructor de Item.
 
     def get_id(self):
-        NormalItem.get_id(self)
+        return NormalItem.get_id(self)
 
     def set_name(self, name):
         NormalItem.set_name(self, name)
