@@ -41,3 +41,26 @@ class TestRoutes(TestCase):
         self.assertEqual(data['name'], 'item3')
         self.assertEqual(data['quality'], 30)
         self.assertEqual(data['type'], 'normal')
+
+    def test_update_item(self):
+        item = self.client.post('/add_items', json={
+            "name": "item3",
+            "sell_in": 15,
+            "quality": 30,
+            "type": "normal"
+        })
+
+        item_id = item.json['result']['_id']
+        response = self.client.put('/update_item', json={
+            "_id": item_id,
+            "name": "item1",
+            "sell_in": 15,
+            "quality": 30
+        })
+        data = response.json['result']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data, 1)
+        item = self.client.get('/item/' + item_id).json['result']
+        self.assertEqual(item['name'], 'item1')
+        self.assertEqual(item['quality'], 30)
+        self.assertEqual(item['sell_in'], 15)
