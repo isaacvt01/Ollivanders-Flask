@@ -93,3 +93,17 @@ class DB():
             return True
         else:
             raise Exception
+
+
+    def init_db(self):
+        self.inventario.items.clear()
+        self.collection.drop()
+        self.collection.insert_many([
+            {'name': 'Aged Brie', 'sell_in': 2, 'quality': 0, 'type': 'aged brie'},
+            {'name': 'Sulfuras, Hand of Ragnaros', 'sell_in': 0, 'quality': 80, 'type': 'sulfuras'},
+            {'name': 'Backstage passes to a TAFKAL80ETC concert', 'sell_in': 15, 'quality': 20, 'type': 'backstage'},
+            {'name': 'Conjured Mana Cake', 'sell_in': 3, 'quality': 6, 'type': 'conjured'}])
+
+        for item in self.collection.find():
+            self.inventario.create_item(item['_id'], item['name'], item['sell_in'], item['quality'], item['type'])
+        return str(self.inventario.items)

@@ -64,3 +64,10 @@ class TestRoutes(TestCase):
         self.assertEqual(item['name'], 'item1')
         self.assertEqual(item['quality'], 30)
         self.assertEqual(item['sell_in'], 15)
+
+    def test_init_db(self):
+        response = self.client.post('/inicializar')
+        self.assertEqual(response.status_code, 200)
+        items_name = ['Aged Brie', 'Sulfuras, Hand of Ragnaros', 'Backstage passes to a TAFKAL80ETC concert', 'Conjured Mana Cake']
+        for item in items_name:
+            self.assertTrue(item in str(response.data))

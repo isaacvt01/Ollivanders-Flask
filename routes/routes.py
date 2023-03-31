@@ -39,3 +39,8 @@ def update_item():
 @bp.route('/item/<item_id>', methods=['GET'])
 def get_item(item_id):
     return Db.get_item(item_id)
+
+# Ruta para inicializar la base de datos
+@bp.route('/inicializar', methods=['POST'])
+def init_db():
+    return Db.init_db()
