@@ -28,3 +28,16 @@ class TestRoutes(TestCase):
         self.assertEqual(len(data), 2)
         self.assertEqual(data[0]['name'], 'item1')
         self.assertEqual(data[1]['quality'], 20)
+
+    def test_add_item(self):
+        response = self.client.post('/add_items', json={
+            "name": "item3",
+            "sell_in": 15,
+            "quality": 30,
+            "type": "normal"
+        })
+        data = response.json['result']
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(data['name'], 'item3')
+        self.assertEqual(data['quality'], 30)
+        self.assertEqual(data['type'], 'normal')
