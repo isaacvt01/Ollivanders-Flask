@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import jsonify
 from pymongo import MongoClient
 from domain.GildedRose import GildedRose
@@ -46,6 +47,26 @@ class DB():
             return jsonify({'result': output})
         except:
             return jsonify({'result': 'Error adding item'})
+
+    def update_item(self, _id, name, sell_in, quality):
+        try:
+            self.isDigit(sell_in, quality)
+            updated = self.collection.update_one({'_id': ObjectId(_id)},
+                                                 {'$set': {'name': name, 'sell_in': int(sell_in),
+                                                           'quality': int(quality)}})
+            self.inventario.update_item_inventory(ObjectId(_id), name, sell_in, quality)
+            return jsonify({'result': updated.modified_count})
+        except:
+            return Exception
+
+    def get_item(self, _id):
+        item = self.collection.find_one({'_id': ObjectId(_id)})
+        if item:
+            output = {'_id': str(item['_id']), 'name': item['name'], 'sell_in': item['sell_in'],
+                      'quality': item['quality'], 'type': item['type']}
+        else:
+            output = 'No results found'
+        return jsonify({'result': output})
 
     @staticmethod
     def isDigit(value1, value2):

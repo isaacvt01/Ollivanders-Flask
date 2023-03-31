@@ -15,12 +15,27 @@ def get_all_items():
     return Db.get_all_items()
 
 
+# Ruta para agregar un item a la base de datos
 @bp.route('/add_items', methods=['POST'])
-
-
 def add_item():
     name = request.json['name']
     sell_in = request.json['sell_in']
     quality = request.json['quality']
     type = request.json['type']
     return Db.add_item(name, sell_in, quality, type)
+
+
+# Ruta para actualizar un item del inventario
+@bp.route('/update_item', methods=['PUT'])
+def update_item():
+    item_id = request.json['_id']
+    name = request.json['name']
+    sell_in = request.json['sell_in']
+    quality = request.json['quality']
+    return Db.update_item(item_id, name, sell_in, quality)
+
+
+# Ruta para mostrar un item
+@bp.route('/item/<item_id>', methods=['GET'])
+def get_item(item_id):
+    return Db.get_item(item_id)
