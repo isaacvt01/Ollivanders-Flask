@@ -68,7 +68,8 @@ class TestRoutes(TestCase):
     def test_init_db(self):
         response = self.client.post('/inicializar')
         self.assertEqual(response.status_code, 200)
-        items_name = ['Aged Brie', 'Sulfuras, Hand of Ragnaros', 'Backstage passes to a TAFKAL80ETC concert', 'Conjured Mana Cake']
+        items_name = ['Aged Brie', 'Sulfuras, Hand of Ragnaros', 'Backstage passes to a TAFKAL80ETC concert',
+                      'Conjured Mana Cake']
         for item in items_name:
             self.assertTrue(item in str(response.data))
 
@@ -87,3 +88,8 @@ class TestRoutes(TestCase):
         self.assertEqual(deleted_item.json['result'], 1)
         response = self.client.get('/item/' + item_id).json['result']
         self.assertEqual(response, 'No results found')
+
+    def test_update_inventory(self):
+        response = self.client.put('/update_inventory')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json['result'], 'Inventario actualizado')

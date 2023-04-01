@@ -140,3 +140,14 @@ class DB():
         for item in self.inventario.items:
             output.append({'name': item.name, 'sell_in': item.sell_in, 'quality': item.quality})
         return jsonify({'result': output})
+
+    def update_inventory(self):
+        try:
+            self.inventario.update_quality()
+            for item in self.inventario.items:
+                self.collection.update_one({'_id': item._id},
+                                           {'$set': {'sell_in': item.sell_in, 'quality': item.quality}})
+        except:
+            return jsonify({'result': 'Error updating inventory'})
+        finally:
+            return jsonify({'result': 'Inventario actualizado'})

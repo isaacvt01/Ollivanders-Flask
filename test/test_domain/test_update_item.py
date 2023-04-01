@@ -1,6 +1,7 @@
 from domain.GildedRose import GildedRose
 import pytest
 
+
 @pytest.fixture
 def inventario():
     inventario = GildedRose([])
@@ -10,6 +11,7 @@ def inventario():
     inventario.create_item(4, "item4", 10, 20, "aged brie")
     inventario.create_item(5, "item5", 10, 20, "backstage")
     return inventario
+
 
 def test_update_item(inventario):
     inventario.update_item_inventory(1, "actualizado", 5, 10)

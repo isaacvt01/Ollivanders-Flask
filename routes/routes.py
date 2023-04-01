@@ -56,3 +56,8 @@ def delete_item():
 @bp.route('/get_inventory', methods=['GET'])
 def get_inventory():
     return Db.get_inventory()
+
+
+@bp.route('/update_inventory', methods=['PUT'])
+def update_inventory():
+    return Db.update_inventory()
