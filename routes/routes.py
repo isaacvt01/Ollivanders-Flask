@@ -85,3 +85,18 @@ def update_html():
 
     else:
         return render_template('update_item_temp.html')
+
+
+@bp.route('/form/create', methods=['POST', 'GET'])
+def create_html():
+    if request.method == 'POST':
+        name = request.form['name']
+        sell_in = request.form['sell_in']
+        quality = request.form['quality']
+        item_type = request.form['type']
+        _id = db.add_item(name, sell_in, quality, item_type).json['result']['_id']
+
+        return render_template('create_item_temp.html', datosItem=db.get_item(_id).json['result'])
+
+    else:
+        return render_template('create_item_temp.html', datosItem='')

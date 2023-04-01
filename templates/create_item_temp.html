@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Item</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <form method="POST" action="{{ url_for('routes.create_html') }}">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="sell_in">Sell in</label>
+        <input type="text" id="sell_in" name="sell_in" required>
+        <label for="quality">Quality</label>
+        <input type="text" id="quality" name="quality" required>
+        <label for="type">Type</label>
+        <select type="text" id="type" name="type" required>
+            <option value="normal">Normal</option>
+            <option value="sulfuras">Sulfuras</option>
+            <option value="conjured">Conjured</option>
+            <option value="backstage">Backstage</option>
+            <option value="aged brie">Aged Brie</option>
+        </select>
+        <input type="submit" value="Enviar">
+    </form>
+    {% if datosItem != '' %}
+            <table>
+              <tr>
+                <td> ID: {{ datosItem._id}}</td>
+                <td>Name: {{  datosItem.name}}</td>
+                <td>Sell in: {{  datosItem.sell_in }}</td>
+                <td>Quality: {{  datosItem.quality }}</td>
+                <td>Type: {{  datosItem.type }}</td>
+              </tr>
+            </table>
+    {% else %}
+    {% endif %}
+
+
+</body>
+</html>
