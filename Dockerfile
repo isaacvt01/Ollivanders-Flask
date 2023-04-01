@@ -1,9 +1,17 @@
-FROM python:3.9-slim-buster
+
+FROM python:3.10-alpine
+
+ENV PYTHONPATH="/app/"
+ENV MONGO_ATLAS_URI="mongodb://localhost:27017"
+
+RUN pip install --upgrade pip
 
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-COPY . .
+COPY . /app/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
 EXPOSE 5000
-CMD ["flask", "run"]
+
+CMD [ "python", "./app.py" ]
