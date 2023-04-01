@@ -71,3 +71,19 @@ class TestRoutes(TestCase):
         items_name = ['Aged Brie', 'Sulfuras, Hand of Ragnaros', 'Backstage passes to a TAFKAL80ETC concert', 'Conjured Mana Cake']
         for item in items_name:
             self.assertTrue(item in str(response.data))
+
+    def test_delete_item(self):
+        item_id = self.client.post('/add_items', json={
+            "name": "item3",
+            "sell_in": 15,
+            "quality": 30,
+            "type": "normal"
+        }).json['result']['_id']
+        deleted_item = self.client.delete('/delete_item', json={
+            "_id": item_id
+        })
+        self.assertEqual(deleted_item.status_code, 200)
+        self.assertEqual(deleted_item.status_code, 200)
+        self.assertEqual(deleted_item.json['result'], 1)
+        response = self.client.get('/item/' + item_id).json['result']
+        self.assertEqual(response, 'No results found')

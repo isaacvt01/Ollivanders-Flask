@@ -40,7 +40,19 @@ def update_item():
 def get_item(item_id):
     return Db.get_item(item_id)
 
+
 # Ruta para inicializar la base de datos
 @bp.route('/inicializar', methods=['POST'])
 def init_db():
     return Db.init_db()
+
+
+@bp.route('/delete_item', methods=['DELETE'])
+def delete_item():
+    item_id = request.json['_id']
+    return Db.delete_item(item_id)
+
+
+@bp.route('/get_inventory', methods=['GET'])
+def get_inventory():
+    return Db.get_inventory()

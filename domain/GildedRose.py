@@ -42,3 +42,8 @@ class GildedRose():
         for item in self.items:
             output += str(item) + '\n'
         return output
+
+    def delete_item_inventory(self, _id):
+        for item in self.items:
+            if item.get_id() == _id:
+                self.items.remove(item)
