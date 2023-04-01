@@ -61,3 +61,8 @@ def get_inventory():
 @bp.route('/update_inventory', methods=['PUT'])
 def update_inventory():
     return Db.update_inventory()
+
+@bp.route('/delete_many', methods=['DELETE'])
+def delete_many_items():
+    type = request.json.get('type')
+    return Db.delete_many_items(type)

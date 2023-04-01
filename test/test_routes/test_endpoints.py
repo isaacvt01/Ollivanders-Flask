@@ -93,3 +93,12 @@ class TestRoutes(TestCase):
         response = self.client.put('/update_inventory')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json['result'], 'Inventario actualizado')
+
+    def test_delete_many(self):
+        response = self.client.delete('/delete_many', json={
+            "type": "normal"
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json['result'], 'Items deleted')
+        response = self.client.get('/items').json['result']
+        self.assertEqual(len(response), 0)

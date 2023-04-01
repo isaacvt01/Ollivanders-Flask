@@ -151,3 +151,10 @@ class DB():
             return jsonify({'result': 'Error updating inventory'})
         finally:
             return jsonify({'result': 'Inventario actualizado'})
+
+    def delete_many_items(self, type):
+        try:
+            self.collection.delete_many({'type': type})
+            return jsonify({'result': 'Items deleted'})
+        except:
+            return jsonify({'result': 'Error deleting items'})
