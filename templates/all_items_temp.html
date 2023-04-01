@@ -8,6 +8,12 @@
 <body>
     <h1>Inventory</h1>
     <table>
+        <tr>
+            <th>Name</th>
+            <th>Quality</th>
+            <th>Sell in</th>
+            <th>Type</th>
+        </tr>
           {% for item in items %}
               <tr>
                 <td>{{ item.name }}</td>

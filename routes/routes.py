@@ -62,11 +62,26 @@ def get_inventory():
 def update_inventory():
     return db.update_inventory()
 
+
 @bp.route('/delete_many', methods=['DELETE'])
 def delete_many_items():
     type = request.json.get('type')
     return db.delete_many_items(type)
 
+
 @bp.route('/form/all_items', methods=['GET'])
 def all_items_html():
     return render_template('all_items_temp.html', items=db.get_all_items().json['result'])
+
+
+@bp.route('/form/update', methods=['POST', 'GET'])
+def update_html():
+    if request.method == 'POST':
+        _id = request.form['_id']
+        name = request.form['name']
+        sell_in = request.form['sell_in']
+        quality = request.form['quality']
+        return db.update_item(_id, name, sell_in, quality)
+
+    else:
+        return render_template('update_item_temp.html')

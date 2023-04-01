@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Item</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Update Item</h1>
+    <form method="POST" action="{{ url_for('routes.update_html') }}">
+        <label for="_id">_id</label>
+        <input type="text" id="_id" name="_id" required>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="sell_in">Sell in</label>
+        <input type="text" id="sell_in" name="sell_in" required>
+        <label for="quality">Quality</label>
+        <input type="text" id="quality" name="quality" required>
+        <input type="submit" value="Enviar">
+    </form>
+
+</body>
+</html>
