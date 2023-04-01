@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List items</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tabla.css') }}">
+</head>
+<body>
+    <h1>Inventory</h1>
+    <table>
+          {% for item in items %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quality }}</td>
+                <td>{{ item.sell_in }}</td>
+                <td>{{ item.type }}</td>
+              </tr>
+          {% endfor %}
+    </table>
+
+</body>
+</html>
