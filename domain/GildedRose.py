@@ -31,11 +31,11 @@ class GildedRose():
         item_types = {'normal': NormalItem, 'conjured': ConjuredItem, 'aged brie': AgedBrie, 'sulfuras': Sulfuras,
                       'backstage': Backstage}
         item_class = item_types.get(type.lower())
-        if item_class:
+        try:
             item = item_class(_id, name, sell_in, quality)
             self.items.append(item)
-        else:
-            raise ValueError(f"Tipo de item inválido {type}")
+        except:
+            Exception("Error creating item")
 
     def __repr__(self) -> str:
         output = ''

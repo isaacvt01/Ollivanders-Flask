@@ -102,3 +102,31 @@ class TestRoutes(TestCase):
         self.assertEqual(response.json['result'], 'Items deleted')
         response = self.client.get('/items').json['result']
         self.assertEqual(len(response), 0)
+
+    def test_add_item_with_non_numeric_sell_in_and_quality(self):
+        response = self.client.post('/add_items', json={
+            "name": "item3",
+            "sell_in": "not_a_number",
+            "quality": "not_a_number",
+            "type": "normal"
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json['result'], 'Error adding item')
+
+    def test_update_item_with_non_numeric_sell_in_and_quality(self):
+        item = self.client.post('/add_items', json={
+            "name": "item3",
+            "sell_in": 15,
+            "quality": 30,
+            "type": "normal"
+        })
+
+        item_id = item.json['result']['_id']
+        response = self.client.put('/update_item', json={
+            "_id": item_id,
+            "name": "item1",
+            "sell_in": "not_a_number",
+            "quality": "not_a_number"
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json['result'], 'Error updating item')

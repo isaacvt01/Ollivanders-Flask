@@ -61,7 +61,7 @@ class DB():
             self.inventario.update_item_inventory(ObjectId(_id), name, sell_in, quality)
             return jsonify({'result': updated.modified_count})
         except:
-            return Exception
+            return jsonify({'result': 'Error updating item'})
 
         # Elimina un item por su id
 
