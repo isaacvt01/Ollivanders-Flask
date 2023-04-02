@@ -101,7 +101,7 @@ class DB():
         types = ['aged brie', 'sulfuras', 'backstage', 'conjured', 'normal']
         try:
             if type not in types:
-                raise ValueError(f"Tipo no válido: {type}")
+                raise ValueError(f"Non valid type: {type}")
             return True
         except ValueError as error:
             return str(error)
@@ -150,7 +150,7 @@ class DB():
         except:
             return jsonify({'result': 'Error updating inventory'})
         finally:
-            return jsonify({'result': 'Inventario actualizado'})
+            return jsonify({'result': 'Inventory updated'})
 
     def delete_many_items(self, type):
         try:
