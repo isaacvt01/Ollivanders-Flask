@@ -48,6 +48,12 @@ Antes de comenzar, asegúrese de tener lo siguiente instalado en su sistema:
 
 `pip install -r requirements.txt`
 
+4. Crear archivo .env
+
+Crear archivo .env con:
+
+`MONGO_URI=(URI DE TU MONGO ATLAS)`
+
 
 ## Ejecución de la aplicación
 
